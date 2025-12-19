@@ -3,6 +3,22 @@ from src.data_loader import load_data
 from src.correlation import rolling_correlation
 from src.visualization import plot_heatmap
 from src.regime import detect_regime
+from src.pca_analysis import correlation_pca
+
+
+pca_series = {}
+
+for date, corr in rolling_corrs.items():
+    pca_var = correlation_pca(corr)
+    pca_series[date] = pca_var[0]  # PC1
+
+import pandas as pd
+pca_df = pd.Series(pca_series)
+
+pca_df.plot(
+    title="Systemic Risk Indicator (PC1 Explained Variance)",
+    figsize=(10,5)
+)
 
 
 prices, returns = load_data(ASSETS)
