@@ -31,4 +31,16 @@ for date , label in zip([calm_date , stress_date] , ["Calm Market", "Recent/Stre
     corr = rolling_corrs[date]
     regime = detect_regime(corr)
     plot_heatmap( corr , f"{label} Correlation heatmap ",  regime)
+
+
+
+pre_covid = returns.loc["2015-01-01":"2019-12-31"]
+post_covid = returns.loc["2020-03-01":]
+
+pre_corr = pre_covid.corr()
+post_corr = post_covid.corr()
+
+plot_heatmap(pre_corr, "Pre-COVID Correlation Heatmap", regime="Normal Regime")
+plot_heatmap(post_corr, "Post-COVID Correlation Heatmap", regime="High Correlation Regime")
+
     
