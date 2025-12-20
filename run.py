@@ -2,8 +2,17 @@ from data.tickers import ASSETS
 from src.data_loader import load_data 
 from src.correlation import rolling_correlation
 from src.visualization import plot_heatmap
-from src.regime import detect_regime
+from src.regimes import detect_regime
 from src.pca_analysis import correlation_pca
+from src.systemic_metrics import average_correlation, eigenvalue_concentration
+
+avg_corr_series = {}
+pc1_series = {}
+
+for date, corr in rolling_corrs.items():
+    avg_corr_series[date] = average_correlation(corr)
+    pc1_series[date] = eigenvalue_concentration(corr)
+
 
 
 pca_series = {}
