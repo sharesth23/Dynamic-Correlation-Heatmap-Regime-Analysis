@@ -52,4 +52,16 @@ post_corr = post_covid.corr()
 plot_heatmap(pre_corr, "Pre-COVID Correlation Heatmap", regime="Normal Regime")
 plot_heatmap(post_corr, "Post-COVID Correlation Heatmap", regime="High Correlation Regime")
 
-    
+import pandas as pd
+import matplotlib.pyplot as plt
+
+avg_corr = pd.Series(avg_corr_series)
+pc1 = pd.Series(pc1_series)
+
+avg_corr.plot(title="Average Cross-Asset Correlation")
+plt.savefig("paper/figures/fig_avg_correlation.png", dpi=300)
+plt.clf()
+
+pc1.plot(title="Systemic Risk Indicator (PC1)")
+plt.savefig("paper/figures/fig_pca_systemic_risk.png", dpi=300)
+plt.clf()
