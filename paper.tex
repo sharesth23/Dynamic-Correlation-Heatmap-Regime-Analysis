@@ -1,13 +1,98 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+
+\title{Dynamic Cross-Asset Correlation Structure and Systemic Risk}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study the time-varying correlation structure across equities, foreign exchange, rates, and commodities.
+Using rolling correlation matrices, heatmap visualization, and spectral decomposition via Principal Component
+Analysis (PCA), we show that diversification is highly regime-dependent and collapses during periods of market stress.
+The first principal component of the correlation matrix acts as a robust proxy for systemic risk.
+We further document a structural shift in cross-asset correlations following the COVID-19 crisis.
+\end{abstract}
+
 \section{Introduction}
+Portfolio diversification relies on stable correlation assumptions.
+Empirically, correlations are non-stationary and rise sharply during market stress,
+precisely when diversification is most needed.
+This paper analyzes correlation dynamics at the portfolio level
+and quantifies systemic risk using the evolving dependence structure.
+
 \section{Related Literature}
+Our work relates to the literature on correlation breakdowns during crises
+(Longin and Solnik, 2001), systemic risk measurement (Kritzman et al.),
+and dynamic dependence modeling (Engle, 2002).
+
 \section{Data}
+We analyze daily returns for equities, FX, rates, and commodities from 2015 onward.
+All prices are adjusted close and synchronized on a common trading calendar.
+
 \section{Methodology}
+
 \subsection{Rolling Correlation Estimation}
-\subsection{Spectral Decomposition of Correlation Matrices}
+Let $R_t \in \mathbb{R}^N$ denote asset returns.
+For a rolling window $W$, the correlation matrix is:
+\[
+C_t = \text{Corr}(R_{t-W:t})
+\]
+
+\subsection{Average Correlation Level}
+We define the average pairwise correlation:
+\[
+\bar{\rho}_t = \frac{2}{N(N-1)} \sum_{i<j} \rho_{ij,t}
+\]
+This serves as a proxy for global correlation regimes.
+
+\subsection{Spectral Decomposition}
+Each correlation matrix is decomposed as:
+\[
+C_t = V_t \Lambda_t V_t^\top
+\]
+The proportion of variance explained by the first eigenvalue:
+\[
+\text{PC1}_t = \frac{\lambda_{1,t}}{\sum_i \lambda_{i,t}}
+\]
+is interpreted as a measure of systemic risk concentration.
+
 \section{Empirical Results}
+
 \subsection{Rolling Heatmaps}
-\subsection{Systemic Risk via PCA}
-\subsection{Pre- vs Post-COVID Structural Shift}
+Figure~\ref{fig:heatmap} shows rolling correlation heatmaps.
+Correlation clustering intensifies during stress periods.
+
+\subsection{Systemic Risk Indicator}
+Figure~\ref{fig:pca} plots the PC1 time series.
+Sharp spikes coincide with known crisis periods, including COVID-19.
+
+\subsection{Pre- vs Post-COVID Analysis}
+Post-COVID correlations exhibit persistently higher baseline levels,
+suggesting reduced long-term diversification benefits.
+
 \section{Discussion}
+Correlation concentration reflects market-wide risk transmission
+and highlights the fragility of static diversification assumptions.
+
 \section{Limitations}
+The analysis relies on linear correlations and PCA.
+Nonlinear dependence and tail risk are not explicitly modeled.
+
 \section{Conclusion}
+Dynamic correlation modeling provides critical insights into systemic risk.
+Portfolio construction frameworks must account for regime-dependent dependence structures.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
